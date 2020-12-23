@@ -2,10 +2,12 @@ package com.mariuspaavel.xmlparser;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
 
 public class Block extends Element implements List<Element> {
@@ -87,6 +89,12 @@ public class Block extends Element implements List<Element> {
 	}
 	public void removeParam(String domain, String name) {
 		params.remove(new Identifier(name, domain));
+	}
+	public Set<String> getParamNames(){
+		Set<Identifier> paramsset = params.keySet();
+		Set<String> paramNames = new HashSet<String>();
+		for(Identifier i : paramsset)paramNames.add(i.name.toString());
+		return paramNames;
 	}
 	public Str addText(String text) {
 		Str str = new Str(text);
